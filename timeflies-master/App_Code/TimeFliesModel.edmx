@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TimeFliesByModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="TimeFliesByModelStoreContainer">
+          <EntitySet Name="Images" EntityType="TimeFliesByModel.Store.Images" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="TimeFliesByModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Videos" EntityType="TimeFliesByModel.Store.Videos" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Images_User" Association="TimeFliesByModel.Store.FK_Images_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_Videos" Association="TimeFliesByModel.Store.FK_Images_Videos">
+            <End Role="Videos" EntitySet="Videos" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Videos_User" Association="TimeFliesByModel.Store.FK_Videos_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VideoId" Type="nvarchar" MaxLength="10" />
+          <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ImageName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ThumbPath" Type="nvarchar" MaxLength="200" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="300" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="IsEdit" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="IsReSeq" Type="bit" Nullable="false" />
+          <Property Name="IsInvalid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" />
+          <Property Name="YoutubeId" Type="nvarchar" MaxLength="300" />
+          <Property Name="YoutubePass" Type="nvarchar" MaxLength="300" />
+          <Property Name="YoutubeVideoId" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsYoutube" Type="bit" Nullable="false" />
+          <Property Name="RightEye" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeftEye" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="AccessToken" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="BrowseId" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="VideoId" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="VideoName" Type="nvarchar" MaxLength="150" />
+          <Property Name="UserReminderTime" Type="datetime" />
+          <Property Name="ServerReminderTime" Type="datetime" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="800" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="IsReminder" Type="bit" Nullable="false" />
+          <Property Name="IsSentReminder" Type="bit" Nullable="false" />
+          <Property Name="EncodedVideoPath" Type="nvarchar" MaxLength="300" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsCompile" Type="bit" Nullable="false" />
+          <Property Name="IsError" Type="bit" Nullable="false" />
+          <Property Name="ErrorDescription" Type="nvarchar(max)" />
+          <Property Name="IsImage" Type="bit" Nullable="false" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsSoundTrack" Type="bit" Nullable="false" />
+          <Property Name="SoundTrackPath" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsUploadToYouTube" Type="bit" Nullable="false" />
+          <Property Name="Publish" Type="nvarchar" MaxLength="50" />
+          <Property Name="Views" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Images_User">
+          <End Role="User" Type="TimeFliesByModel.Store.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Images" Type="TimeFliesByModel.Store.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_Videos">
+          <End Role="Videos" Type="TimeFliesByModel.Store.Videos" Multiplicity="0..1" />
+          <End Role="Images" Type="TimeFliesByModel.Store.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Videos">
+              <PropertyRef Name="VideoId" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Videos_User">
+          <End Role="User" Type="TimeFliesByModel.Store.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Videos" Type="TimeFliesByModel.Store.Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TimeFlies.Data" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TimeFliesByEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Images" EntityType="TimeFlies.Data.Images" />
+          <EntitySet Name="User" EntityType="TimeFlies.Data.AppUser" />
+          <EntitySet Name="Videos" EntityType="TimeFlies.Data.Videos" />
+          <AssociationSet Name="FK_Images_User" Association="TimeFlies.Data.FK_Images_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Images_Videos" Association="TimeFlies.Data.FK_Images_Videos">
+            <End Role="Videos" EntitySet="Videos" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Videos_User" Association="TimeFlies.Data.FK_Videos_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="ComplexType1" />
+        <ComplexType Name="ComplexType2" >
+          <Property Type="Boolean" Name="Property1" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Type="Int32" Name="ImageId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="VideoId" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImageName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ThumbPath" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ImagePath" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateAdded" Nullable="false" />
+          <Property Type="Boolean" Name="IsRead" Nullable="false" />
+          <Property Type="Boolean" Name="IsEdit" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Boolean" Name="IsReSeq" Nullable="false" />
+          <Property Type="Boolean" Name="IsInvalid" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TimeFlies.Data.FK_Images_User" FromRole="Images" ToRole="User" />
+          <NavigationProperty Name="Videos" Relationship="TimeFlies.Data.FK_Images_Videos" FromRole="Images" ToRole="Videos" />
+        </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FullName" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="YoutubeId" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="YoutubePass" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="YoutubeVideoId" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsYoutube" Nullable="false" />
+          <Property Type="String" Name="RightEye" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LeftEye" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="DateAdded" Nullable="false" />
+          <Property Type="String" Name="AccessToken" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="LastLogin" />
+          <Property Type="String" Name="BrowseId" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Images" Relationship="TimeFlies.Data.FK_Images_User" FromRole="User" ToRole="Images" />
+          <NavigationProperty Name="Videos" Relationship="TimeFlies.Data.FK_Videos_User" FromRole="User" ToRole="Videos" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Type="String" Name="VideoId" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VideoName" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="UserReminderTime" />
+          <Property Type="DateTime" Name="ServerReminderTime" />
+          <Property Type="String" Name="TimeZone" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateAdded" />
+          <Property Type="Boolean" Name="IsReminder" Nullable="false" />
+          <Property Type="Boolean" Name="IsSentReminder" Nullable="false" />
+          <Property Type="String" Name="EncodedVideoPath" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Duration" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsCompile" Nullable="false" />
+          <Property Type="Boolean" Name="IsError" Nullable="false" />
+          <Property Type="String" Name="ErrorDescription" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsImage" Nullable="false" />
+          <Property Type="String" Name="ImagePath" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsSoundTrack" Nullable="false" />
+          <Property Type="String" Name="SoundTrackPath" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsUploadToYouTube" Nullable="false" />
+          <Property Type="String" Name="Publish" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Views" Nullable="false" />
+          <NavigationProperty Name="Images" Relationship="TimeFlies.Data.FK_Images_Videos" FromRole="Videos" ToRole="Images" />
+          <NavigationProperty Name="User" Relationship="TimeFlies.Data.FK_Videos_User" FromRole="Videos" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Images_User">
+          <End Type="TimeFlies.Data.AppUser" Role="User" Multiplicity="1" />
+          <End Type="TimeFlies.Data.Images" Role="Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Images_Videos">
+          <End Type="TimeFlies.Data.Videos" Role="Videos" Multiplicity="0..1" />
+          <End Type="TimeFlies.Data.Images" Role="Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Videos">
+              <PropertyRef Name="VideoId" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Videos_User">
+          <End Type="TimeFlies.Data.AppUser" Role="User" Multiplicity="1" />
+          <End Type="TimeFlies.Data.Videos" Role="Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TimeFliesByModelStoreContainer" CdmEntityContainer="TimeFliesByEntities">
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="TimeFlies.Data.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="IsInvalid" ColumnName="IsInvalid" />
+                <ScalarProperty Name="IsReSeq" ColumnName="IsReSeq" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsEdit" ColumnName="IsEdit" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="ThumbPath" ColumnName="ThumbPath" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="TimeFlies.Data.AppUser">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="BrowseId" ColumnName="BrowseId" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LeftEye" ColumnName="LeftEye" />
+                <ScalarProperty Name="RightEye" ColumnName="RightEye" />
+                <ScalarProperty Name="IsYoutube" ColumnName="IsYoutube" />
+                <ScalarProperty Name="YoutubeVideoId" ColumnName="YoutubeVideoId" />
+                <ScalarProperty Name="YoutubePass" ColumnName="YoutubePass" />
+                <ScalarProperty Name="YoutubeId" ColumnName="YoutubeId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="TimeFlies.Data.Videos">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="Publish" ColumnName="Publish" />
+                <ScalarProperty Name="IsUploadToYouTube" ColumnName="IsUploadToYouTube" />
+                <ScalarProperty Name="SoundTrackPath" ColumnName="SoundTrackPath" />
+                <ScalarProperty Name="IsSoundTrack" ColumnName="IsSoundTrack" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="IsImage" ColumnName="IsImage" />
+                <ScalarProperty Name="ErrorDescription" ColumnName="ErrorDescription" />
+                <ScalarProperty Name="IsError" ColumnName="IsError" />
+                <ScalarProperty Name="IsCompile" ColumnName="IsCompile" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="EncodedVideoPath" ColumnName="EncodedVideoPath" />
+                <ScalarProperty Name="IsSentReminder" ColumnName="IsSentReminder" />
+                <ScalarProperty Name="IsReminder" ColumnName="IsReminder" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="ServerReminderTime" ColumnName="ServerReminderTime" />
+                <ScalarProperty Name="UserReminderTime" ColumnName="UserReminderTime" />
+                <ScalarProperty Name="VideoName" ColumnName="VideoName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TimeFliesModel">
+        <EntityTypeShape EntityType="TimeFlies.Data.Images" Width="1.5" PointX="5.25" PointY="7" Height="3.766419375141461" />
+        <EntityTypeShape EntityType="TimeFlies.Data.AppUser" Width="1.5" PointX="0.75" PointY="4.125" Height="4.3531036766370139" />
+        <EntityTypeShape EntityType="TimeFlies.Data.Videos" Width="1.5" PointX="3" PointY="8.125" Height="5.5264722796281163" />
+        <AssociationConnector Association="TimeFlies.Data.FK_Images_User" >
+          <ConnectorPoint PointX="2.25" PointY="7.53125" />
+          <ConnectorPoint PointX="5.25" PointY="7.53125" />
+        </AssociationConnector>
+        <AssociationConnector Association="TimeFlies.Data.FK_Images_Videos" >
+          <ConnectorPoint PointX="4.5" PointY="9.44570968757073" />
+          <ConnectorPoint PointX="5.25" PointY="9.44570968757073" />
+        </AssociationConnector>
+        <AssociationConnector Association="TimeFlies.Data.FK_Videos_User" >
+          <ConnectorPoint PointX="2.25" PointY="8.3015518383185061" />
+          <ConnectorPoint PointX="3" PointY="8.3015518383185061" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

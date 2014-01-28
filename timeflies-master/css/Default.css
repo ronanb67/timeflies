@@ -1,0 +1,264 @@
+/* CSS Document */
+
+body
+{
+	font-family: Arial;
+	margin: 0px;
+	padding: 0px;
+		background-color: #ededed;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.container
+{
+	width: 800px;
+	margin: 0 auto;
+	position: relative;
+}
+#main
+{
+	position: absolute;
+	width: 100%;
+	background-color: White;
+}
+.header
+{
+	height: 107px;
+	width: 800px;
+	background-color: White;
+	margin: 0 auto;
+}
+.topHeading
+{
+	margin-left: 0px;
+/*	margin-top: 10px; */
+	font-size: 30px;
+}
+.headingContent
+{
+	margin-left: 0px;
+	font-size: 18px;
+}
+.headerImg
+{
+	background-image: url('time-flies.gif' );
+}
+.login_forgot {
+	font-size:12px; 
+	}
+.login_forgot a {
+	color:#3a4c8e}
+.login_word { font-size:16px}
+
+label {margin-left:5px;}
+.lbl
+{
+    color:#144167; font:Arial, Helvetica, sans-serif; font-size:15px;
+}
+.info, .success, .warning, .error, .validation {
+border: 1px solid;
+margin: 0px 0px;
+padding:3px 5px 3px 5px;
+background-repeat: no-repeat;
+background-position: 10px center;
+}
+.info {
+color: #00529B;
+background-color: #BDE5F8;
+background-image: url('images/20/info.png');
+}
+.success {
+color: #4F8A10;
+background-color: #E6F8DD;
+/* background-image:url('images/20/success.png'); */
+}
+.warning {
+color: #9F6000;
+background-color: #FEEFB3;
+/*background-image: url('images/20/warning.png'); */
+}
+.error {
+color: #D8000C;
+background-color: #FFEEEE;
+/* background-image: url('images/20/error.png'); */
+}
+
+.footer
+{
+	height: 50px;
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+	font-family: Arial;
+	font-size: 18px;
+	font-style: normal;
+}
+.mainTop
+{
+	font-size: 18px;
+	text-align: center;
+	margin: 25px;
+}
+.video
+{
+	width: 645px;
+	margin: 0 auto;
+}
+.fbIcon
+{
+	margin: 0 auto;
+	width: 100px;
+}
+.Container
+{
+	border-style: solid;
+	border-width: 5px;
+	border-color: #92C0F1;
+	width: 770px;
+	height: 600px;
+}
+.rounded-corners
+{
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+}
+.rounded-cornersdBlock
+{
+	-moz-border-radius: 0 0 4px 4px;
+}
+
+.subRows1
+{
+  background-color:#FBF9F1;
+  /* font-family: Arial;
+  font-size: 30pt; font-size: 30pt;
+  font-weight:normal;*/
+  text-align: center;
+  color:#333333;
+  height: 87px;
+  border: solid 1px #E1E1E1;
+  width: 541px;
+}
+.headerRowCell1 {
+  background-color: #92C0F1;
+  color: #FFFFFF;
+  font-family: Arial;
+  font-size: 12px;/*font-size: 33pt;*/
+  font-weight: normal ;
+  text-align: center;
+  height: 30px;
+  width: 541px;
+   border: solid 1px #E1E1E1
+ 
+   
+}
+.grid-pager
+{
+	background: #92C0F1;
+	border-top: solid 1 black;
+	 color:#FFFFFF;
+}
+
+
+#video-wrapper {
+ 	background: black;
+border: 5px solid #cecccc;
+position: relative;
+padding: 10px;
+width: 315px;
+height: 240px;
+margin: 0 auto;
+-moz-border-radius: 15px;
+-webkit-border-radius: 15px;
+border-radius: 15px;
+}
+.copyright
+{
+ font-size:12px;
+  color:Gray;
+}
+.copyrightLinks
+{
+font-size:12px;
+  color:#3d70ca;
+}
+.copyrightLinks a
+{
+  color:#3d70ca;
+}
+.tbl
+{
+width:520px; font-size:14px;
+}
+.tbl td
+{
+ height:27px;
+}
+a
+{
+ color:#3D70CA;
+}
+.linkurl
+{
+color:#3D70CA;
+font-size: 13px;
+ text-decoration:underline;
+}
+.breadcrumb
+{
+ color:Black;
+}
+.linkTestBox
+{
+      color: #78797A;
+    float: left;
+    font-family: Arial;
+    font-size: 17px;
+    font-weight: bold;
+    height: 20px;
+    width: 452px;
+    
+}
+.LogoutLink
+{
+font-size:12px;
+  color:#3d70ca;
+  text-decoration:underline;
+   cursor:pointer;
+}
+.LogoutLink a
+{
+  color:#3d70ca;
+  text-decoration:underline;
+}
+.btnLogout
+{
+ visibility:hidden;
+}
+.image-wrapper {
+
+border: 3px solid #bfcfe5;
+
+width: 140px;
+height: 105px;
+margin: 0 auto;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+
+
+}
+
+#imageList a:link { text-decoration:none; padding:0; margin:0; border:0; border-bottom:none;}
+#imageList a:visited { text-decoration:none; padding:0; margin:0; border:0; border-bottom:none;}
+#imageList a:hover {text-decoration:none; padding:0; margin:0; border:0; border-bottom:none;}
+#imageList a:active {text-decoration:none; padding:0; margin:0; border:0; border-bottom:none;}
+
+.tbbreadcrumb
+{
+ font-size:12px;
+}
